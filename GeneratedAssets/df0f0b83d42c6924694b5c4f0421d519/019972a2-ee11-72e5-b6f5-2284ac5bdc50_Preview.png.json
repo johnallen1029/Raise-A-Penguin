@@ -1,0 +1,11 @@
+{
+    "asset": "df0f0b83d42c6924694b5c4f0421d519",
+    "fileName": "019972a2-ee11-72e5-b6f5-2284ac5bdc50_Preview.png",
+    "prompt": "Snow",
+    "negativePrompt": "",
+    "model": "575ecf67-4425-4939-97b9-5e138b8ee234",
+    "modelName": "Unity Texture2D",
+    "customSeed": 304599385,
+    "w3CTraceId": "1b406c4412c76a1f6c5af4bc677a6dac",
+    "refinementMode": "Generation"
+}

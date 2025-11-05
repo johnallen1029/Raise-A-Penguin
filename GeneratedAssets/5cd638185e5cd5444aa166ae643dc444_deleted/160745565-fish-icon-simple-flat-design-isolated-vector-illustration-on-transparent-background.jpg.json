@@ -1,0 +1,20 @@
+{
+    "asset": "5cd638185e5cd5444aa166ae643dc444",
+    "fileName": "160745565-fish-icon-simple-flat-design-isolated-vector-illustration-on-transparent-background.jpg",
+    "prompt": "",
+    "negativePrompt": "",
+    "model": "",
+    "modelName": "",
+    "customSeed": -1,
+    "w3CTraceId": "",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

@@ -1,0 +1,20 @@
+{
+    "asset": "73ee7ef08af74824fa39b108c404c048",
+    "fileName": "019972ae-871c-7170-bae8-a5b3980116c8.jpg",
+    "prompt": "A sprite of a fishing bar for a fishing minigame, with a moving indicator and a highlighted middle section.",
+    "negativePrompt": "",
+    "model": "94c4260f-b988-40e7-b3d3-435b9f449bd0",
+    "modelName": "Flux.1 Dev",
+    "customSeed": -1,
+    "w3CTraceId": "d6fdfd5959a0436d386b6512b97b40bf",
+    "refinementMode": "Generation",
+    "pixelateTargetSize": 0,
+    "pixelateKeepImageSize": false,
+    "pixelatePixelBlockSize": 0,
+    "pixelateMode": 0,
+    "pixelateOutlineThickness": 0,
+    "doodles": {
+        "m_Items": []
+    },
+    "upscaleFactor": 0
+}

@@ -1,0 +1,11 @@
+{
+    "asset": "5886991cdb2203249a794953e00762ca",
+    "fileName": "01995067-cb87-78f7-afcc-93698c71b525_Preview.png",
+    "prompt": "Igloo",
+    "negativePrompt": "",
+    "model": "575ecf67-4425-4939-97b9-5e138b8ee234",
+    "modelName": "Unity Texture2D",
+    "customSeed": 1631444997,
+    "w3CTraceId": "8d8932b6384214c3bbcc55cd90aba691",
+    "refinementMode": "Generation"
+}

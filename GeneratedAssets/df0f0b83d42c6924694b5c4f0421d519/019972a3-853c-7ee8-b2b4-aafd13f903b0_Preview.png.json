@@ -1,0 +1,11 @@
+{
+    "asset": "df0f0b83d42c6924694b5c4f0421d519",
+    "fileName": "019972a3-853c-7ee8-b2b4-aafd13f903b0_Preview.png",
+    "prompt": "Powdery Snow",
+    "negativePrompt": "",
+    "model": "575ecf67-4425-4939-97b9-5e138b8ee234",
+    "modelName": "Unity Texture2D",
+    "customSeed": 1108295799,
+    "w3CTraceId": "2efb3769026442aac379fcf882516e14",
+    "refinementMode": "Generation"
+}
