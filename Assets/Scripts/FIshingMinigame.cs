@@ -45,24 +45,24 @@ public class FishingMinigame : MonoBehaviour
 
     void Update()
     {
-        if (Keyboard.current[Key.E].wasPressedThisFrame && !isFishing)
-        {
-            StartFishing();
-        }
+        // if (Keyboard.current[Key.E].wasPressedThisFrame && !isFishing)
+        // {
+        //     StartFishing();
+        // }
 
-        if (fishBit && !sequenceActive && hookSetTimerActive)
-        {
-            Key keyEnum;
-            if (System.Enum.TryParse<Key>(interactionKey.ToUpper(), out keyEnum))
-            {
-                var keyControl = Keyboard.current[keyEnum];
-                if (keyControl != null && keyControl.wasPressedThisFrame)
-                {
-                    hookSetTimerActive = false;
-                    StartCoroutine(StartSequence());
-                }
-            }
-        }
+        // if (fishBit && !sequenceActive && hookSetTimerActive)
+        // {
+        //     Key keyEnum;
+        //     if (System.Enum.TryParse<Key>(interactionKey.ToUpper(), out keyEnum))
+        //     {
+        //         var keyControl = Keyboard.current[keyEnum];
+        //         if (keyControl != null && keyControl.wasPressedThisFrame)
+        //         {
+        //             hookSetTimerActive = false;
+        //             StartCoroutine(StartSequence());
+        //         }
+        //     }
+        // }
 
         if (sequenceActive)
         {
@@ -73,6 +73,7 @@ public class FishingMinigame : MonoBehaviour
     public void StartFishing()
     {
         Debug.Log("Fishing started!");
+        gameObject.SetActive(true); 
         isFishing = true;
         PlayerMovement playerMovement = player.GetComponent<PlayerMovement>();
         if (playerMovement != null)

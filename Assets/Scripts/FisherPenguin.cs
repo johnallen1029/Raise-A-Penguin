@@ -11,9 +11,9 @@ using TMPro;
 
 public class FisherPenguin : MonoBehaviour
 {
-    public int maxFishCount = 10; // Maximum fish the FisherPenguin can hold
-    public float minFishingInterval = 5f; // Minimum time between fishing actions
-    public float maxFishingInterval = 15f; // Maximum time between fishing actions
+    public int maxFishCount = 100; // Maximum fish the FisherPenguin can hold
+    public float minFishingInterval = 2f; // Minimum time between fishing actions
+    public float maxFishingInterval = 5f; // Maximum time between fishing actions
     public GameObject player; // Reference to the player object
     public TextMeshProUGUI promptText; // UI element to display the interaction prompt
     public string interactionKey = "E"; // Key to interact with the FisherPenguin

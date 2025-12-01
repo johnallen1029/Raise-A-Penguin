@@ -1,7 +1,7 @@
 
-
 using UnityEngine;
-using UnityEngine.UI; 
+using UnityEngine.UI;
+using TMPro;
 
 public class UpgradeMenu : MonoBehaviour
 {
@@ -9,6 +9,7 @@ public class UpgradeMenu : MonoBehaviour
     public GameObject[] pages;
     public Button leftArrow;
     public Button rightArrow;
+
 
     public GameObject arrowCanvas; 
 
@@ -32,10 +33,20 @@ public class UpgradeMenu : MonoBehaviour
 
     public Button sentryButton;
 
+    public Button multButton; 
+
     public PenguinHunger penguinHunger;
 
     public GameObject drill1;
     public GameObject drill2;
+
+    public GameObject drillTwo;
+    public GameObject drillTwoPivot;
+
+    public GameObject drillThree;
+    public GameObject drillThreePivot;
+
+    public GameObject quarry; 
     public Button drillButton;
 
     public GameObject fisherPenguin;
@@ -43,9 +54,29 @@ public class UpgradeMenu : MonoBehaviour
 
     public Button drillUpgradeButton;
 
+    public Button drillSpeedButton; 
+
     public DrillerInteraction drillerInteraction;
 
-    public Button upFeatherButton; 
+    public DrillerInteraction driller2Interaction;
+
+    public DrillerInteraction driller3Interaction; 
+
+    public Button upFeatherButton;
+
+    public GameObject penguinModel;
+
+    public Button growPenguinButton;
+
+    public CashEmit cashEmit;
+
+    private int drillCount = 0;
+
+    private int drillSpeedCount = 0; 
+
+    public GameObject moneyShrine; 
+
+    int upgradeCost = 20;
 
     private void Start()
     {
@@ -81,6 +112,7 @@ public class UpgradeMenu : MonoBehaviour
         {
             currentPageIndex++;
             UpdatePageVisibility();
+            
         }
     }
     
@@ -94,18 +126,23 @@ public class UpgradeMenu : MonoBehaviour
     }
     public void UpgradeFeather()
     {
-        int upgradeCost = 20;
         int cashIncrease = 10;
         if (GameManager.Instance.SpendMoney(upgradeCost) && moneyUpCount < 10)
         {
             Cash.cashValue += cashIncrease;
             Debug.Log("cash value increased");
-            moneyUpCount++; 
+            TextMeshProUGUI childText = upFeatherButton.transform.Find("topText").GetComponent<TextMeshProUGUI>();
+            TextMeshProUGUI costText = upFeatherButton.transform.Find("costText").GetComponent<TextMeshProUGUI>(); 
+            moneyUpCount++;
+            upgradeCost += 50;
+            childText.text = $"Money Upgrade ({moneyUpCount} / 10)";
+            costText.text = $"${upgradeCost}"; 
+            
 
-            // if (moneyUpCount >= 10)
-            // {
-            //     upFeatherButton.interactable = false; 
-            // }
+            if (moneyUpCount >= 10)
+            {
+                upFeatherButton.interactable = false; 
+            }
         }
         else
         {
@@ -123,7 +160,7 @@ public class UpgradeMenu : MonoBehaviour
 
     public void WinDaGame()
     {
-        if (GameManager.Instance.SpendFish(200))
+        if (GameManager.Instance.hasEnoughFish(100) && GameManager.Instance.hasEnoughMoney(7000) && GameManager.Instance.hasEnoughPebble(40))
         {
             gameObject.SetActive(false);
             FindFirstObjectByType<GameOverManager>().TriggerWinState();
@@ -205,10 +242,21 @@ public class UpgradeMenu : MonoBehaviour
         }
     }
 
+    public void addShrine()
+    {
+        int cost = 10; 
+        if (GameManager.Instance.SpendPebble(cost))
+        {
+            moneyShrine.SetActive(true); 
+
+            multButton.interactable = false; 
+        }
+    }
+
     public void hireSentry()
     {
         
-        if (GameManager.Instance.SpendPebble(20))
+        if (GameManager.Instance.SpendPebble(15))
         {
             penguinSentry.SetActive(true);
             sentryButton.interactable = false;
@@ -217,18 +265,38 @@ public class UpgradeMenu : MonoBehaviour
 
     public void buildDrill()
     {
-        int cost = 5000;
+        int cost = 2000;
         if (GameManager.Instance.SpendMoney(cost))
         {
-            drill1.SetActive(true);
-            drill2.SetActive(true);
-            drillButton.interactable = false;
+            if (drillCount == 0)
+            {
+                drill1.SetActive(true);
+                drill2.SetActive(true);
+                quarry.SetActive(true);
+                drillCount++;
+                return; 
+            }
+            if (drillCount == 1)
+            {
+                drillTwo.SetActive(true);
+                drillTwoPivot.SetActive(true);
+                drillCount++;
+                return; 
+            }
+            if (drillCount == 2)
+            {
+                drillThree.SetActive(true);
+                drillThreePivot.SetActive(true);
+                drillButton.interactable = false; 
+            }
+
+            
         }
     }
     
     public void hireFisher()
     {
-        if (GameManager.Instance.SpendMoney(10))
+        if (GameManager.Instance.SpendPebble(5))
         {
             fisherPenguin.SetActive(true);
             fisherButton.interactable = false; 
@@ -237,16 +305,40 @@ public class UpgradeMenu : MonoBehaviour
 
     public void upgradeDrill()
     {
-        if (GameManager.Instance.SpendMoney(6000))
+        if (GameManager.Instance.SpendMoney(3000))
         {
-            if (drillerInteraction != null)
+            if (drillSpeedCount == 0)
             {
                 drillerInteraction.drillDuration = 1f;
+                drillSpeedCount++;
+                return;
             }
-            else
+            if (drillSpeedCount == 1)
             {
-                Debug.LogWarning("DrillerInteraction reference is not assigned.");
+                driller2Interaction.drillDuration = 1f;
+                drillSpeedCount++;
+                return;
             }
+            if (drillSpeedCount == 2)
+            {
+                driller3Interaction.drillDuration = 1f;
+                drillSpeedButton.interactable = false; 
+            }
+            
+            
+        }
+    }
+
+    public void growPenguin()
+    {
+        if (GameManager.Instance.SpendFish(1))
+        {
+            penguinModel.transform.localScale = new Vector3(89f, 89f, 89f);
+            float currentHunger = penguinHunger.hungerDrainRate;
+            penguinHunger.hungerDrainRate = currentHunger + 2f;
+            Debug.Log("Current hunger is {penguinHunger.hungerDrainRate}");
+            cashEmit.UpdateEmitInterval(1f);  
+            growPenguinButton.interactable = false; 
         }
     }
 

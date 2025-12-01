@@ -8,6 +8,8 @@ public class Money : MonoBehaviour
         if (collision.gameObject.CompareTag("Player"))
         {
             GameManager.Instance.AddMoney(Cash.cashValue);
+            SoundEffectManager.Instance.PlayMoneySound(); 
+            
             Destroy(gameObject); 
         }
     }

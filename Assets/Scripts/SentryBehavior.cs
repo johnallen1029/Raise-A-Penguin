@@ -1,4 +1,3 @@
-
 using UnityEngine;
 
 public class SentryBehavior : MonoBehaviour
@@ -8,6 +7,10 @@ public class SentryBehavior : MonoBehaviour
     public float detectionRange = 15f; // Range to detect enemies
     public float snowballSpeed = 500; // Speed of the snowball
     public float fireRate = 1f; // Time between snowball throws
+
+    [Header("Throw Sound Settings")]
+    [SerializeField] private AudioSource audioSource; // Assign the AudioSource component
+    [SerializeField] private AudioClip[] throwSounds; // Assign throw sound clips in the Inspector
 
     private float nextFireTime = 2f;
 
@@ -25,11 +28,9 @@ public class SentryBehavior : MonoBehaviour
         }
     }
 
-
-// 10/13/2025 AI-Tag
-// This was created with the help of Assistant, a Unity Artificial Intelligence product.
-
 private void ThrowSnowball(Transform target)
+{
+if (GameManager.Instance.hasEnoughPebble(1))
 {
     Debug.Log("throwing");
     GameObject snowball = Instantiate(snowballPrefab, snowballSpawnPoint.position, Quaternion.identity);
@@ -48,7 +49,10 @@ private void ThrowSnowball(Transform target)
     rb.linearVelocity = direction * snowballSpeed;
 
     // Destroy the snowball after a few seconds
+    GameManager.Instance.SpendPebble(1); 
+    PlayThrowSound(); 
     Destroy(snowball, 3f);
+}
 }
 
     private void OnDrawGizmosSelected()
@@ -56,5 +60,15 @@ private void ThrowSnowball(Transform target)
         // Visualize the detection range in the Scene view
         Gizmos.color = Color.blue;
         Gizmos.DrawWireSphere(transform.position, detectionRange);
+    }
+
+     private void PlayThrowSound()
+    {
+        if (throwSounds.Length > 0 && audioSource != null)
+        {
+            int randomIndex = Random.Range(0, throwSounds.Length);
+            audioSource.clip = throwSounds[randomIndex];
+            audioSource.Play();
+        }
     }
 }

@@ -1,7 +1,6 @@
 using UnityEngine;
 using TMPro;
 using UnityEngine.Rendering;
-using Unity.VisualScripting;
 
 public class MoneyUI : MonoBehaviour
 {

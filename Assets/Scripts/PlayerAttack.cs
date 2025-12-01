@@ -3,7 +3,7 @@ using UnityEngine.InputSystem;
 
 public class PlayerAttack : MonoBehaviour
 {
-    public float punchDamage = 25f;
+    public float punchDamage = 200f;
     public float punchRange = 4f;
     public LayerMask enemyLayer;
 
@@ -33,6 +33,7 @@ public class PlayerAttack : MonoBehaviour
     void Punch()
     {
         // Check for enemies in range
+        SoundEffectManager.Instance.PlayPunchSound(); 
         Collider[] hitEnemies = Physics.OverlapSphere(transform.position, punchRange, enemyLayer);
 
         foreach (Collider enemy in hitEnemies)

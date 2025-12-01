@@ -8,6 +8,8 @@ public class GameManager : MonoBehaviour
     public int PlayerFish { get; set; } = 0;
 
     public int PlayerPebble { get; set; } = 0; 
+
+    public int MoneyMult {get; set;} = 1; 
     public event Action OnMoneyChanged;
     public event Action OnFishChanged;
 
@@ -31,7 +33,8 @@ public class GameManager : MonoBehaviour
 
     public void AddMoney(int amount)
     {
-        PlayerMoney += amount;
+        int addAmount = amount * MoneyMult; 
+        PlayerMoney += addAmount;
         Debug.Log($"Money added: {amount}. Total money: {PlayerMoney}");
         OnMoneyChanged?.Invoke();
     }
@@ -46,7 +49,8 @@ public class GameManager : MonoBehaviour
 
     public void AddFish(int amount)
     {
-        PlayerFish += amount;
+        int addAmount = amount * MoneyMult; 
+        PlayerFish += addAmount;
         OnFishChanged?.Invoke();
     }
 
@@ -80,7 +84,8 @@ public class GameManager : MonoBehaviour
     }
     public void AddPebble(int amount)
     {
-        PlayerPebble += amount;
+        int addAmount = amount * MoneyMult; 
+        PlayerPebble += addAmount;
         OnPebbleChanged?.Invoke();
 
         if (PlayerPebble > 0 && !acquired)
@@ -89,7 +94,7 @@ public class GameManager : MonoBehaviour
             acquired = true; 
         }
     }
-    
+
     public bool SpendPebble(int amount)
     {
         if (PlayerPebble >= amount)
@@ -100,8 +105,38 @@ public class GameManager : MonoBehaviour
         }
         else
         {
-            return false; 
+            return false;
         }
+    }
+
+    public bool hasEnoughFish(int amount)
+    {
+        if (PlayerFish >= amount)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+
+    public bool hasEnoughMoney(int amount)
+    {
+        if (PlayerMoney >= amount)
+        {
+            return true;
+        }
+        else
+            return false;
+    }
+    
+    public bool hasEnoughPebble(int amount)
+    {
+        if (PlayerPebble >= amount)
+        {
+            return true;
+        }
+        else 
+            return false; 
     }
     
 }

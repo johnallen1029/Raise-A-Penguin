@@ -69,9 +69,12 @@ public class FishingInteraction : MonoBehaviour
     {
         upgradeMenu.SetActive(true);
 
-        FishingMinigame fishingMinigame = upgradeMenu.GetComponent<FishingMinigame>();
-        fishingMinigame.fishingTarget = fishingTarget; 
-        fishingMinigame.StartFishing(); 
+        // 11/17/2025 AI-Tag
+// This was created with the help of Assistant, a Unity Artificial Intelligence product.
+
+        FishingRhythmMinigame fishingRhythmMinigame = upgradeMenu.GetComponent<FishingRhythmMinigame>();
+        fishingRhythmMinigame.fishingTarget = fishingTarget; 
+        fishingRhythmMinigame.StartFishing(); 
     }
 
     void ShowPrompt(bool show)

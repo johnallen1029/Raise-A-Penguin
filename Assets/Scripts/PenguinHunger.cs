@@ -1,23 +1,27 @@
+// 12/1/2025 AI-Tag
+// This was created with the help of Assistant, a Unity Artificial Intelligence product.
+
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+
 public class PenguinHunger : MonoBehaviour
 {
-   [SerializeField] private Slider hungerSlider;
+    [SerializeField] private Slider hungerSlider;
 
     private float interactionDistance = 3f;
     [SerializeField] private GameObject player;
 
     [SerializeField] public FishFeeder fishFeeder;
 
-    [SerializeField] public HealthBar healthBar; 
+    [SerializeField] public HealthBar healthBar;
 
     private Camera mainCamera;
 
     private float maxHunger = 100f;
     public float hungerDrainRate = 0.5f;
 
-    public float healthDrainRate = 5f; 
+    public float healthDrainRate = 5f;
     private int fishRestoreAmount = 20;
 
     public float maxHealth = 50;
@@ -25,8 +29,13 @@ public class PenguinHunger : MonoBehaviour
 
     public float currentHunger;
 
-    private bool isHealthDraining = false; 
+    private bool isHealthDraining = false;
 
+    [Header("Eating Sound Settings")]
+    [SerializeField] private AudioSource audioSource; // Assign the AudioSource component
+    [SerializeField] private AudioClip[] eatingSounds; // Assign eating sound clips in the Inspector
+    private float soundCooldown = 5f; // Cooldown duration in seconds
+    private float lastSoundTime = -5f; // Tracks the last time a sound was played
 
     private void Start()
     {
@@ -47,13 +56,15 @@ public class PenguinHunger : MonoBehaviour
             Die();
         }
     }
+
     public void Die()
     {
         FindFirstObjectByType<GameOverManager>().TriggerGameOver();
     }
+
     private void Update()
     {
-        // Drain 
+        // Drain
         hungerSlider.transform.LookAt(hungerSlider.transform.position + mainCamera.transform.forward);
         if (!isHealthDraining)
         {
@@ -74,8 +85,8 @@ public class PenguinHunger : MonoBehaviour
 
             if (currentHealth <= 0)
             {
-                healthBar.SetHealth(0, maxHealth); 
-                Die(); 
+                healthBar.SetHealth(0, maxHealth);
+                Die();
             }
         }
 
@@ -102,6 +113,7 @@ public class PenguinHunger : MonoBehaviour
             {
                 GameManager.Instance.AddFish(-1);
                 Debug.Log("PenguinFed!");
+                PlayEatingSound(); // Play eating sound when fed
 
                 currentHunger += fishRestoreAmount;
                 currentHunger = Mathf.Clamp(currentHunger, 0, maxHunger);
@@ -116,9 +128,12 @@ public class PenguinHunger : MonoBehaviour
 
         if (currentHunger > 0)
         {
-            isHealthDraining = false; 
+            isHealthDraining = false;
         }
+
+        
     }
+
     private void UpdateHungerUI()
     {
         if (hungerSlider != null)
@@ -126,12 +141,27 @@ public class PenguinHunger : MonoBehaviour
             hungerSlider.value = currentHunger / maxHunger;
         }
     }
+
     private void OnHungerDepleted()
     {
         Debug.Log("Penguin is starving!!");
         if (fishFeeder.storedFish < 1)
         {
-            isHealthDraining = true; 
+            isHealthDraining = true;
+        }
+    }
+
+    private void PlayEatingSound()
+    {
+        if (Time.time >= lastSoundTime + soundCooldown)
+        {
+            if (eatingSounds.Length > 0)
+            {
+                int randomIndex = Random.Range(0, eatingSounds.Length);
+                audioSource.clip = eatingSounds[randomIndex];
+                audioSource.Play();
+                lastSoundTime = Time.time; // Update the last sound play time
+            }
         }
     }
 }
