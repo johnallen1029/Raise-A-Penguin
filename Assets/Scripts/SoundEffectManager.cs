@@ -140,7 +140,7 @@ public class SoundEffectManager : MonoBehaviour
         {
             AudioSource source = GetAvailableAudioSource();
             
-            // DON'T store original settings - each AudioSource should be configured fresh
+            
             // Reset to defaults first
             source.pitch = pitch;
             source.outputAudioMixerGroup = sfxMixerGroup;
@@ -148,7 +148,6 @@ public class SoundEffectManager : MonoBehaviour
             // Play the sound
             source.PlayOneShot(clip);
             
-            // NO COROUTINES - let the AudioSource keep its settings until next use
         }
         else
         {
@@ -170,7 +169,7 @@ public class SoundEffectManager : MonoBehaviour
             // Play the sound
             source.PlayOneShot(clip);
             
-            // NO COROUTINES - settings persist until this AudioSource is used again
+          
         }
         else
         {
@@ -220,7 +219,6 @@ public class SoundEffectManager : MonoBehaviour
         SetKeyHitVolume(volume);
     }
     
-    // NEW: Method to reset all AudioSources to defaults (call this if issues persist)
     public void ResetAllAudioSources()
     {
         foreach (AudioSource source in audioSourcePool)

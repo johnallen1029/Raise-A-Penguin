@@ -1,6 +1,3 @@
-// 11/4/2025 AI-Tag
-// This was created with the help of Assistant, a Unity Artificial Intelligence product.
-
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
@@ -68,9 +65,6 @@ public class FishingInteraction : MonoBehaviour
     void StartFishingMinigame()
     {
         upgradeMenu.SetActive(true);
-
-        // 11/17/2025 AI-Tag
-// This was created with the help of Assistant, a Unity Artificial Intelligence product.
 
         FishingRhythmMinigame fishingRhythmMinigame = upgradeMenu.GetComponent<FishingRhythmMinigame>();
         fishingRhythmMinigame.fishingTarget = fishingTarget; 

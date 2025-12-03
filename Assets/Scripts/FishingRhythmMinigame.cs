@@ -281,7 +281,7 @@ private FlyingKey GetActiveFlyingKeyInHitWindow(Key key)
             // Add fish to inventory
             Debug.Log($"Added {fishAdd} fish to inventory!");
             GameManager.Instance.AddFish(fishReward); 
-            // Add your fish collection logic here
+
         }
 
         sequenceText.text = "";

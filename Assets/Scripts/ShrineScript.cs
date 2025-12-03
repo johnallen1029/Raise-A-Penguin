@@ -1,9 +1,3 @@
-// 12/1/2025 AI-Tag
-// This was created with the help of Assistant, a Unity Artificial Intelligence product.
-
-// 11/30/2025 AI-Tag
-// This was created with the help of Assistant, a Unity Artificial Intelligence product.
-
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;

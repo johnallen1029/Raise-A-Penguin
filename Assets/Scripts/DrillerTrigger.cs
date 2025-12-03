@@ -1,9 +1,3 @@
-// 11/3/2025 AI-Tag
-// This was created with the help of Assistant, a Unity Artificial Intelligence product.
-
-// 11/3/2025 AI-Tag
-// This was created with the help of Assistant, a Unity Artificial Intelligence product.
-
 using UnityEngine;
 using UnityEngine.InputSystem; // Import the New Input System namespace
 using TMPro;
